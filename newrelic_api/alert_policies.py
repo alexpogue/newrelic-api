@@ -54,5 +54,11 @@ class AlertPolicies(Resource):
             data=data
         )
 
-        # TODO: implement delete
+    def delete(self, policy_id):
+        return self._delete(
+            url='{0}alerts_policies/{1}.json'.format(self.URL, policy_id),
+            headers=self.headers
+        )
+
+        # TODO: implement update
         # See https://docs.newrelic.com/docs/alerts/new-relic-alerts-beta/getting-started/rest-api-calls-new-relic-alerts
