@@ -49,6 +49,7 @@ class AlertPolicies(Resource):
         return self._put(
             url='{0}alerts_policies.json'.format(self.URL),
             headers=self.headers,
+            data=data
         )
 
         # TODO: implement delete
