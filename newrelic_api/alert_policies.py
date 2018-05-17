@@ -42,8 +42,10 @@ class AlertPolicies(Resource):
 
     def create(self, name, incident_preference):
         data = {
-            "name": name,
-            "incident_preference": incident_preference
+            "policy": {
+                "name": name,
+                "incident_preference": incident_preference
+            }
         }
 
         return self._post(
