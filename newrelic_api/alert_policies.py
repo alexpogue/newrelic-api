@@ -46,7 +46,7 @@ class AlertPolicies(Resource):
             "incident_preference": incident_preference
         }
 
-        return self._put(
+        return self._post(
             url='{0}alerts_policies.json'.format(self.URL),
             headers=self.headers,
             data=data
