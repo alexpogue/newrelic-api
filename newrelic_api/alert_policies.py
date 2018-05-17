@@ -54,11 +54,29 @@ class AlertPolicies(Resource):
             data=data
         )
 
+    def update(self, policy_id, name, incident_preference):
+        policies_dict = self.list()
+        target_policy = next((p for p in policies_dict['policies'] if int(p['id']) == policy_id), None)
+        if target_policy is None:
+            raise NoEntityException(
+                'Target policy does not exist.'
+                'policy_id: {}'.format(policy_id))
+
+        data = {
+            'policy': {
+                'name': name or target_policy['name'],
+                'incident_preference': incident_preference or target_policy['incident_preference']
+            }
+        }
+
+        return self._put(
+            url='{0}alerts_policies/{1}.json'.format(self.URL, policy_id),
+            headers=self.headers,
+            data=data
+        )
+
     def delete(self, policy_id):
         return self._delete(
             url='{0}alerts_policies/{1}.json'.format(self.URL, policy_id),
             headers=self.headers
         )
-
-        # TODO: implement update
-        # See https://docs.newrelic.com/docs/alerts/new-relic-alerts-beta/getting-started/rest-api-calls-new-relic-alerts
