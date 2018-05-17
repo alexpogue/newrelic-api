@@ -40,5 +40,16 @@ class AlertPolicies(Resource):
             params=self.build_param_string(filters)
         )
 
-        # TODO: implement create and delete
+    def create(self, name, incident_preference):
+        data = {
+            "name": name,
+            "incident_preference": incident_preference
+        }
+
+        return self._put(
+            url='{0}alerts_policies.json'.format(self.URL),
+            headers=self.headers,
+        )
+
+        # TODO: implement delete
         # See https://docs.newrelic.com/docs/alerts/new-relic-alerts-beta/getting-started/rest-api-calls-new-relic-alerts
