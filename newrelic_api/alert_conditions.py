@@ -27,7 +27,7 @@ class AlertConditions(Resource):
                 "conditions": [
                     {
                         "id": "integer",
-                        "condition_type": "string",
+                        "type": "string",
                         "name": "string",
                         "enabled": "boolean",
                         "entities": [
@@ -65,7 +65,7 @@ class AlertConditions(Resource):
 
     def update(
             self, policy_id, alert_condition_id,
-            condition_type=None,
+            type=None,
             name=None,
             enabled=None,
             entities=None,
@@ -92,7 +92,7 @@ class AlertConditions(Resource):
             {
                 "condition": {
                     "id": "integer",
-                    "condition_type": "string",
+                    "type": "string",
                     "name": "string",
                     "enabled": "boolean",
                     "entities": [
@@ -130,7 +130,7 @@ class AlertConditions(Resource):
 
         data = {
             'condition': {
-                'condition_type': condition_type or target_condition['condition_type'],
+                'type': type or target_condition['type'],
                 'name': name or target_condition['name'],
                 'enabled': enabled or target_condition['enabled'],
                 'entities': entities or target_condition['entities'],
@@ -145,9 +145,9 @@ class AlertConditions(Resource):
             data=data
         )
 
-    def create(self, policy_id, condition_type, name, enabled, entities, metric, terms):
+    def create(self, policy_id, type, name, enabled, entities, metric, terms):
         data = {
-            'type': condition_type,
+            'type': type,
             'name': name,
             'enabled': enabled,
             'entities': entities,
@@ -156,7 +156,7 @@ class AlertConditions(Resource):
         }
 
         return self._post(
-            url='{0}alerts_conditions.json'.format(self.URL),
+            url='{0}alerts_conditions/policies/{1}.json'.format(self.URL, policy_id),
             headers=self.headers,
             data=data
         )
