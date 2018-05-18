@@ -70,7 +70,9 @@ class AlertConditions(Resource):
             enabled=None,
             entities=None,
             metric=None,
-            terms=None):
+            runbook_url=None,
+            terms=None,
+            user_defined=None):
         """
         Updates any of the optional parameters of the alert condition
         :type policy_id: int
@@ -135,7 +137,9 @@ class AlertConditions(Resource):
                 'enabled': enabled or target_condition['enabled'],
                 'entities': entities or target_condition['entities'],
                 'metric': metric or target_condition['metric'],
+                'runbook_url': runbook_url or target_condition['runbook_url'],
                 'terms': terms or target_condition['terms'],
+                'user_defined': user_defined or target_condition['user_defined']
             }
         }
 
@@ -145,14 +149,16 @@ class AlertConditions(Resource):
             data=data
         )
 
-    def create(self, policy_id, type, name, enabled, entities, metric, terms):
+    def create(self, policy_id, type, name, enabled, entities, metric, runbook_url, terms, user_defined):
         data = {
             'type': type,
             'name': name,
             'enabled': enabled,
             'entities': entities,
             'metric': metric,
-            'terms': terms
+            'runbook_url': runbook_url,
+            'terms': terms,
+            'user_defined': user_defined
         }
 
         return self._post(
