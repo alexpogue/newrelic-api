@@ -145,5 +145,26 @@ class AlertConditions(Resource):
             data=data
         )
 
-        # TODO: implement create and delete
+    def create(self, policy_id, condition_type, name, enabled, entities, metric, terms):
+        data = {
+            'type': condition_type,
+            'name': name,
+            'enabled': enabled,
+            'entities': entities,
+            'metric': metric,
+            'terms': terms
+        }
+
+        return self._post(
+            url='{0}alerts_conditions.json'.format(self.URL),
+            headers=self.headers,
+            data=data
+        )
+        
+    def delete(self, condition_id):
+        return self._delete(
+            url='{0}alerts_conditions/{1}.json'.format(self.URL, condition_id),
+            headers=self.headers
+        )
+
         # See https://docs.newrelic.com/docs/alerts/new-relic-alerts-beta/getting-started/rest-api-calls-new-relic-alerts
