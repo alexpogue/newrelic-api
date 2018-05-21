@@ -153,14 +153,16 @@ class AlertConditions(Resource):
 
     def create(self, policy_id, type, name, enabled, entities, metric, runbook_url, terms, user_defined, condition_scope):
         data = {
-            'type': type,
-            'name': name,
-            'enabled': enabled,
-            'entities': entities,
-            'metric': metric,
-            'runbook_url': runbook_url,
-            'terms': terms,
-            'user_defined': user_defined
+            'condition': {
+                'type': type,
+                'name': name,
+                'enabled': enabled,
+                'entities': entities,
+                'metric': metric,
+                'runbook_url': runbook_url,
+                'terms': terms,
+                'user_defined': user_defined
+            }
         }
 
         return self._post(
