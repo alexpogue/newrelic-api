@@ -161,7 +161,8 @@ class AlertConditions(Resource):
                 'metric': metric,
                 'runbook_url': runbook_url,
                 'terms': terms,
-                'user_defined': user_defined
+                'user_defined': user_defined,
+                'condition_scope': condition_scope
             }
         }
 
