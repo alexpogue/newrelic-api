@@ -26,6 +26,64 @@ class NotificationChannels(Resource):
             params=self.build_param_string(filters)
         )
 
+    def update(
+            self,
+            channel_id,
+            name=None,
+            type=None,
+            configuration=None):
+        """
+        Updates any of the optional parameters of the notification channel
+
+        :type channel_id: int
+        :param channel_id: The id of the channel
+
+        :type type: str
+        :param type: The type of notification, e.g. user, email, webhook
+
+        :type configuration: hash
+        :param configuration: The configuration for notification
+
+        ::
+
+            {
+                "channels": {
+                    "id": "integer",
+                    "name": "string",
+                    "type": "string",
+                    "configuration": { }
+                }
+            }
+
+        """
+        channels_dict = self.list()
+
+        target_channel = None
+
+        for channel in channels_dict['channels']
+            if int(channel['id'] == channel_id:
+                target_channel = channel
+                break
+
+        if target_channel is None:
+            raise NoEntityException(
+                'Target notification channel does not exist.'
+                'channel_id {}'.format(channel_id)
+            )
+
+        data = {
+            'channel': {
+                'name': name or target_condition['name'],
+                'type': type or target_condition['type'],
+                'configuration': configuration or target_condition['configuration']
+            }
+
+        return self._put(
+            url='{0}alerts_channels/{1}.json'.format(self.URL, channel_id),
+            headers=self.headers,
+            data=data
+        )
+
     def create(self, name, type, configuration):
         """
         This API endpoint allows you to create a notification channel, see
