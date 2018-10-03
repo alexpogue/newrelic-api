@@ -58,13 +58,13 @@ class NotificationChannelPolicies(Resource):
         }
 
         """
-    params = [ 
-        'channel_id={}'.format(channel_id),
-        'policy_id={}'.format(policy_id)
-    ]
+        params = [ 
+            'channel_id={}'.format(channel_id),
+            'policy_id={}'.format(policy_id)
+        ]
 
-    return self._delete(
-        url='{0}alerts_policy_channels.json'.format(self.URL),
-        headers=self.headers,
-        params=self.build_param_string(params)
-    )
+        return self._delete(
+            url='{0}alerts_policy_channels.json'.format(self.URL),
+            headers=self.headers,
+            params=self.build_param_string(params)
+        )
