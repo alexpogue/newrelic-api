@@ -37,3 +37,34 @@ class NotificationChannelPolicies(Resource):
             headers=self.headers,
             params=self.build_param_string(params)
         )
+
+    def delete(self, channel_id, policy_id):
+        """
+        Deletes the association between the notification channel and the policy
+
+        :type channel_id: int
+        :param channel_id: The id of the Notification Channel
+
+        :type policy_id: int
+        :param policy_id: The id of the policy
+
+        ::
+
+        {
+            "policy_channels": {
+                "policy_id": "integer",
+                "channel_ids": [ ]
+            }
+        }
+
+        """
+    params = [ 
+        'channel_id={}'.format(channel_id),
+        'policy_id={}'.format(policy_id)
+    ]
+
+    return self._delete(
+        url='{0}alerts_policy_channels.json'.format(self.URL),
+        headers=self.headers,
+        params=self.build_param_string(params)
+    )
