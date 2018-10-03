@@ -29,7 +29,7 @@ class NotificationChannelPolicies(Resource):
 
         params = [
             'policy_id={}'.format(policy_id),
-            'channel_ids={}'.format(channel_ids.join(','))
+            'channel_ids={}'.format(','.join(channel_ids))
         ]
 
         return self._put(
